@@ -1,5 +1,10 @@
 module.exports = {
   fields: [ 'firstName', 'lastName', 'username' ],
+
+  // Allow formatting 'Full Name' but only if the sign-up user didn't
+  // already provide one.
+
+  titleFormat: '{firstName} {lastName}', // TODO: handle name locale
   hours: 48,
   signupUrl: '/signup',
   signupConfirmUrl: '/signup-confirm', 
