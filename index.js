@@ -1,13 +1,15 @@
+var _ = require('lodash');
+
 module.exports = {
   fields: [ 'firstName', 'lastName', 'username' ],
 
   // Allow formatting 'Full Name' but only if the sign-up user didn't
   // already provide one.
 
-  titleFormat: '{firstName} {lastName}', // TODO: handle name locale
+  titleFormat: '{firstName} {lastName}',
   hours: 48,
   signupUrl: '/signup',
-  signupConfirmUrl: '/signup-confirm', 
+  signupConfirmUrl: '/signup-confirm',
   afterSignupUrl: '/',
 
   afterConstruct: function(self, callback) {
@@ -20,7 +22,7 @@ module.exports = {
 
   construct: function(self, options) {
     require('./lib/routes.js')(self, options);
-    
+
     self.pushAssets = function() {
       self.pushAsset('script', 'user', { when: 'user' });
       self.pushAsset('stylesheet', 'user', { when: 'user' });
@@ -33,7 +35,7 @@ module.exports = {
     // Ensure the existence of an apostrophe-group for newly
     // created users, as configured via the `group` subproperty
     // of the `create` option.
-    
+
     self.ensureGroup = function(callback) {
       if (!(self.options.group)) {
         return setImmediate(callback);
@@ -51,7 +53,7 @@ module.exports = {
     self.beforeInsert = function(req, user, callback) {
       return callback(null);
     };
-    
+
     // Invoked just after a newly signed-up user is inserted into
     // the database. The user IS NOT confirmed yet. Override
     // as you see fit
@@ -59,7 +61,7 @@ module.exports = {
     self.afterInsert = function(req, user, callback) {
       return callback(null);
     };
-    
+
     // Invoked just after a newly confirmed user is logged in, and
     // just before they are redirected. Override as you see fit
 
